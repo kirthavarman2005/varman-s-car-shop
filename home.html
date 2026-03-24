@@ -1,0 +1,372 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarZone | Premium Automotive Dealership</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .glass-nav {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .car-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .custom-shadow {
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-3xl font-extrabold text-orange-500 tracking-tighter">CAR<span class="text-white">ZONE</span></span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="text-white hover:text-orange-500 font-medium transition">Home</a>
+                    <a href="#inventory" class="text-white hover:text-orange-500 font-medium transition">Inventory</a>
+                    <a href="#about" class="text-white hover:text-orange-500 font-medium transition">About</a>
+                    <a href="#contact" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-full font-semibold transition">Contact Us</a>
+                </div>
+
+                <!-- Mobile Toggle -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900 px-4 pt-2 pb-6 space-y-2 border-t border-zinc-800">
+            <a href="#" class="block text-white py-2">Home</a>
+            <a href="#inventory" class="block text-white py-2">Inventory</a>
+            <a href="#about" class="block text-white py-2">About</a>
+            <a href="#contact" class="block text-orange-500 py-2 font-bold">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-4xl">
+            <h2 class="text-white text-5xl md:text-7xl font-extrabold mb-6 leading-tight">Drive Your <span class="text-orange-500">Ambition</span> Forward</h2>
+            <p class="text-gray-200 text-xl md:text-2xl mb-10 max-w-2xl mx-auto font-light">Experience luxury, performance, and reliability with our curated selection of premium vehicles.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#inventory" class="bg-orange-500 hover:bg-orange-600 text-white px-10 py-4 rounded-xl font-bold text-lg transition shadow-lg shadow-orange-500/20">View Inventory</a>
+                <a href="#about" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-10 py-4 rounded-xl font-bold text-lg transition">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filter & Inventory Section -->
+    <section id="inventory" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Inventory</h2>
+                <div class="w-20 h-1.5 bg-orange-500 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Simple Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button onclick="filterCars('all')" class="filter-btn active bg-orange-500 text-white px-6 py-2 rounded-full font-semibold transition">All Cars</button>
+                <button onclick="filterCars('luxury')" class="filter-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold transition">Luxury</button>
+                <button onclick="filterCars('suv')" class="filter-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold transition">SUVs</button>
+                <button onclick="filterCars('sport')" class="filter-btn bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold transition">Sports</button>
+            </div>
+
+            <div id="car-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Car Card 1 -->
+                <div class="car-card bg-white rounded-2xl overflow-hidden border border-gray-100 custom-shadow transition-transform group" data-category="luxury">
+                    <div class="overflow-hidden h-56 relative">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800" alt="Porsche 911" class="w-full h-full object-cover transition duration-500">
+                        <span class="absolute top-4 left-4 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-md uppercase">Hot Deal</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Porsche 911 Carrera</h3>
+                            <span class="text-orange-500 font-bold text-lg">$114,000</span>
+                        </div>
+                        <div class="flex gap-4 text-gray-500 text-sm mb-6">
+                            <span><i class="fa-solid fa-gas-pump mr-1"></i> Petrol</span>
+                            <span><i class="fa-solid fa-gauge-high mr-1"></i> 2.4k Mi</span>
+                            <span><i class="fa-solid fa-gear mr-1"></i> Automatic</span>
+                        </div>
+                        <button class="w-full bg-slate-900 hover:bg-orange-500 text-white py-3 rounded-xl font-semibold transition-colors">Details</button>
+                    </div>
+                </div>
+
+                <!-- Car Card 2 -->
+                <div class="car-card bg-white rounded-2xl overflow-hidden border border-gray-100 custom-shadow transition-transform group" data-category="suv">
+                    <div class="overflow-hidden h-56 relative">
+                        <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&q=80&w=800" alt="Land Rover" class="w-full h-full object-cover transition duration-500">
+                        <span class="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-md uppercase">Certified</span>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Range Rover Sport</h3>
+                            <span class="text-orange-500 font-bold text-lg">$85,000</span>
+                        </div>
+                        <div class="flex gap-4 text-gray-500 text-sm mb-6">
+                            <span><i class="fa-solid fa-gas-pump mr-1"></i> Diesel</span>
+                            <span><i class="fa-solid fa-gauge-high mr-1"></i> 12k Mi</span>
+                            <span><i class="fa-solid fa-gear mr-1"></i> AWD</span>
+                        </div>
+                        <button class="w-full bg-slate-900 hover:bg-orange-500 text-white py-3 rounded-xl font-semibold transition-colors">Details</button>
+                    </div>
+                </div>
+
+                <!-- Car Card 3 -->
+                <div class="car-card bg-white rounded-2xl overflow-hidden border border-gray-100 custom-shadow transition-transform group" data-category="sport">
+                    <div class="overflow-hidden h-56 relative">
+                        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&q=80&w=800" alt="Ferrari" class="w-full h-full object-cover transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold text-gray-900">Ferrari 488 GTB</h3>
+                            <span class="text-orange-500 font-bold text-lg">$245,000</span>
+                        </div>
+                        <div class="flex gap-4 text-gray-500 text-sm mb-6">
+                            <span><i class="fa-solid fa-gas-pump mr-1"></i> Petrol</span>
+                            <span><i class="fa-solid fa-gauge-high mr-1"></i> 500 Mi</span>
+                            <span><i class="fa-solid fa-gear mr-1"></i> Manual</span>
+                        </div>
+                        <button class="w-full bg-slate-900 hover:bg-orange-500 text-white py-3 rounded-xl font-semibold transition-colors">Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <p class="text-4xl font-extrabold text-orange-500 mb-2">500+</p>
+                <p class="text-gray-400 uppercase tracking-widest text-xs">Cars Sold</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-orange-500 mb-2">15+</p>
+                <p class="text-gray-400 uppercase tracking-widest text-xs">Brands</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-orange-500 mb-2">24/7</p>
+                <p class="text-gray-400 uppercase tracking-widest text-xs">Support</p>
+            </div>
+            <div>
+                <p class="text-4xl font-extrabold text-orange-500 mb-2">99%</p>
+                <p class="text-gray-400 uppercase tracking-widest text-xs">Happy Clients</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-slate-50 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2 relative">
+                    <div class="absolute -top-4 -left-4 w-64 h-64 bg-orange-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"></div>
+                    <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?auto=format&fit=crop&q=80&w=800" alt="Showroom" class="rounded-3xl shadow-2xl relative z-10">
+                </div>
+                <div class="lg:w-1/2">
+                    <h4 class="text-orange-500 font-bold uppercase tracking-widest text-sm mb-4">The CarZone Legacy</h4>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Redefining The Car Buying Experience</h2>
+                    <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                        Since 2012, CarZone has been more than just a dealership. We are a team of enthusiasts dedicated to matching drivers with their perfect vehicles. We pride ourselves on transparent pricing, meticulous vehicle inspections, and unparalleled customer service.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-500/10 p-2 rounded-lg"><i class="fa-solid fa-check text-orange-500"></i></div>
+                            <div>
+                                <h5 class="font-bold text-gray-900">Meticulous Inspection</h5>
+                                <p class="text-gray-500 text-sm">Every car undergoes a 150-point safety and performance check.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-orange-500/10 p-2 rounded-lg"><i class="fa-solid fa-check text-orange-500"></i></div>
+                            <div>
+                                <h5 class="font-bold text-gray-900">Custom Finance</h5>
+                                <p class="text-gray-500 text-sm">Flexible payment plans tailored to your budget.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-slate-900 rounded-[3rem] p-8 md:p-16 flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/3 text-white">
+                    <h2 class="text-4xl font-bold mb-6">Get in Touch</h2>
+                    <p class="text-gray-400 mb-10 text-lg">Have questions about a specific model or want to book a test drive? Our team is here to help.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <i class="fa-solid fa-phone text-orange-500 text-xl"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fa-solid fa-envelope text-orange-500 text-xl"></i>
+                            <span>hello@carzone.com</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <i class="fa-solid fa-location-dot text-orange-500 text-xl"></i>
+                            <span>123 Motor Way, Speed City, CA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-2/3 bg-white p-8 md:p-12 rounded-[2rem]">
+                    <form onsubmit="handleSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                                <input type="text" placeholder="John Doe" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                                <input type="email" placeholder="john@example.com" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Interested Model</label>
+                            <select class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition">
+                                <option>Porsche 911 Carrera</option>
+                                <option>Range Rover Sport</option>
+                                <option>Ferrari 488 GTB</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+                            <textarea rows="4" placeholder="Tell us what you're looking for..." class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 rounded-xl transition shadow-lg shadow-orange-500/25">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-800 pb-12 mb-12">
+                <div class="mb-8 md:mb-0">
+                    <span class="text-3xl font-extrabold text-orange-500 tracking-tighter">CAR<span class="text-white">ZONE</span></span>
+                    <p class="mt-4 max-w-xs text-sm">Elevating your driving experience with curated excellence since 2012.</p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition text-white"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition text-white"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition text-white"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-orange-500 transition text-white"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="text-center text-sm">
+                <p>&copy; 2026 CarZone Premium. All Rights Reserved.</p>
+                <div class="mt-4 flex justify-center gap-6">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                    <a href="#" class="hover:text-white transition">Cookie Settings</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Container -->
+    <div id="notification" class="fixed bottom-8 right-8 bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-y-24 opacity-0 transition-all duration-300 z-[100]">
+        <div class="flex items-center gap-3">
+            <i class="fa-solid fa-circle-check"></i>
+            <span id="notification-text">Message sent successfully!</span>
+        </div>
+    </div>
+
+    <script>
+        // Scroll Effect for Navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-zinc-950/95', 'shadow-xl');
+                nav.classList.remove('glass-nav');
+            } else {
+                nav.classList.remove('bg-zinc-950/95', 'shadow-xl');
+                nav.classList.add('glass-nav');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Car Filter Logic
+        function filterCars(category) {
+            const cards = document.querySelectorAll('.car-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-orange-500', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+
+            event.target.classList.add('bg-orange-500', 'text-white');
+            event.target.classList.remove('bg-gray-100', 'text-gray-700');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // Form Submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const notification = document.getElementById('notification');
+            
+            // Show notification
+            notification.classList.remove('translate-y-24', 'opacity-0');
+            notification.classList.add('translate-y-0', 'opacity-100');
+            
+            e.target.reset();
+
+            // Hide after 3s
+            setTimeout(() => {
+                notification.classList.add('translate-y-24', 'opacity-0');
+                notification.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
